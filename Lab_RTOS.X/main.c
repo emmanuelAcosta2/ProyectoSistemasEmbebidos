@@ -67,12 +67,10 @@
 #include "utils/manejoUSB.h"
 #include "mcc_generated_files/rtcc.h"
 #include "framework/Accelerometer/Accelerometer.h"
-
+#include "lectura.h"
 
 
 void blinkLED(void *p_param);
-
-Accel_t accel;
 
 /*
                          Main application
@@ -81,13 +79,34 @@ int main(void) {
     // initialize the device
     SYSTEM_Initialize();
 
+    //Wait for accel init. If false repeat.
     while (!ACCEL_init()) {
 
     }
+
+    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+
+    /* Finally start the scheduler. */
+    vTaskStartScheduler();
+
+    /* If all is well, the scheduler will now be running, and the following line
+    will never be reached.  If the following line does execute, then there was
+    insufficient FreeRTOS heap memory available for the idle and/or timer tasks
+    to be created.  See the memory management section on the FreeRTOS web site
+    for more details. */
+    for (;;);
+
+
+
+
+
+
+
+
     while (1) {
         char z[100] = "I am learning C programming language.";
 
-        printf("%s", z); // %s is format specifier
+        //printf("%s", z); // %s is format specifier
         ACCEL_GetAccel(&accel);
         //printf("%d",accel->Accel_X);
     }

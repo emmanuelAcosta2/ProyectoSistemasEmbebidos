@@ -87,6 +87,10 @@
         <itemPath>mcc_generated_files/spi1.c</itemPath>
       </logicalFolder>
       <logicalFolder name="platform" displayName="platform" projectFiles="true">
+        <logicalFolder name="helpers" displayName="helpers" projectFiles="true">
+          <itemPath>lectura.h</itemPath>
+          <itemPath>lectura.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>../../../Proyecto/Proyecto.X/platform/LIS3DH/LIS3DH.c</itemPath>
         </logicalFolder>
