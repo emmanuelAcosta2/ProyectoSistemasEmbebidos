@@ -118,7 +118,11 @@ extern "C" {
         double_t posicion_y;
         double_t vector_r;
         double_t angulo;
-    } coordenada;
+        double_t vInicialX;
+        double_t vInicialY;
+        double_t vFinalX;
+        double_t vFinalY;
+    } pelota;
 
 
     //Funcion para calcular coordenadas polares
@@ -126,6 +130,8 @@ extern "C" {
     void getCoordenadaPolar();
     
     void calcularOctante();
+    
+    void calcularPosicionXY();
     
     //
     
