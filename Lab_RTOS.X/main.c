@@ -97,22 +97,6 @@ int main(void) {
     for (;;);
 
 
-
-
-
-
-
-
-    while (1) {
-        char z[100] = "I am learning C programming language.";
-
-        //printf("%s", z); // %s is format specifier
-        ACCEL_GetAccel(&accel);
-        //printf("%d",accel->Accel_X);
-    }
-    return 1;
-
-
 }
 
 void blinkLED(void *p_param) {

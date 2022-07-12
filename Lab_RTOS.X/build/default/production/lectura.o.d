@@ -7,7 +7,8 @@ build/default/production/lectura.o: lectura.c lectura.h \
  freeRTOS/portable/MPLAB/PIC32MM/portmacro.h \
  freeRTOS/include/mpu_wrappers.h utils/delay.h utils/manejo_leds_rgb.h \
  utils/../freeRTOS/include/FreeRTOS.h utils/../freeRTOS/include/semphr.h \
- utils/../freeRTOS/include/queue.h
+ utils/../freeRTOS/include/queue.h freeRTOS/include/task.h \
+ freeRTOS/include/list.h
 
 lectura.h:
 
@@ -40,3 +41,7 @@ utils/../freeRTOS/include/FreeRTOS.h:
 utils/../freeRTOS/include/semphr.h:
 
 utils/../freeRTOS/include/queue.h:
+
+freeRTOS/include/task.h:
+
+freeRTOS/include/list.h:

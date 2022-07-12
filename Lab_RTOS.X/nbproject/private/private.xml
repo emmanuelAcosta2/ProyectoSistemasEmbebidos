@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Proyecto/Proyecto.X/platform/LIS3DH/LIS3DH.c</file>
             <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Laboratorios/Proyecto/Lab_RTOS.X/main.c</file>
+            <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Laboratorios/Proyecto/Lab_RTOS.X/lectura.c</file>
             <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Proyecto/Proyecto.X/framework/Accelerometer/Accelerometer.c</file>
+            <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Laboratorios/Proyecto/Lab_RTOS.X/utils/manejo_leds_rgb.c</file>
             <file>file:/C:/Users/Agroa/OneDrive/Escritorio/Primer%20semestre%202022/Sistemas%20Embebidos/Laboratorios/Proyecto/Lab_RTOS.X/mcc_generated_files/pin_manager.h</file>
         </group>
     </open-files>
