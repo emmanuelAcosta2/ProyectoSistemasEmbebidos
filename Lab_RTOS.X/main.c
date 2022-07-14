@@ -68,6 +68,8 @@
 #include "mcc_generated_files/rtcc.h"
 #include "framework/Accelerometer/Accelerometer.h"
 #include "lectura.h"
+#include "utils.h"
+#include "enemigo.h"
 
 
 void blinkLED(void *p_param);
@@ -78,13 +80,18 @@ void blinkLED(void *p_param);
 int main(void) {
     // initialize the device
     SYSTEM_Initialize();
+    
+    xSemaphoreMutex = xSemaphoreCreateMutex();
 
     //Wait for accel init. If false repeat.
     while (!ACCEL_init()) {
 
     }
 
-    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    
+    
+    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE*10, NULL, tskIDLE_PRIORITY + 1, NULL);
+    //xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
 
     /* Finally start the scheduler. */
     vTaskStartScheduler();

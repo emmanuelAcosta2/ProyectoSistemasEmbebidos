@@ -16,7 +16,8 @@ build/default/production/main.o: main.c freeRTOS/include/FreeRTOS.h \
  utils/../freeRTOS/include/queue.h utils/maquina_estados.h \
  utils/manejoUSB.h mcc_generated_files/rtcc.h \
  framework/Accelerometer/Accelerometer.h \
- framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h lectura.h
+ framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h lectura.h utils.h \
+ freeRTOS/include/FreeRTOS.h freeRTOS/include/semphr.h enemigo.h
 
 freeRTOS/include/FreeRTOS.h:
 
@@ -83,3 +84,11 @@ framework/Accelerometer/Accelerometer.h:
 framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h:
 
 lectura.h:
+
+utils.h:
+
+freeRTOS/include/FreeRTOS.h:
+
+freeRTOS/include/semphr.h:
+
+enemigo.h:

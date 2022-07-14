@@ -90,6 +90,9 @@
         <logicalFolder name="helpers" displayName="helpers" projectFiles="true">
           <itemPath>lectura.h</itemPath>
           <itemPath>lectura.c</itemPath>
+          <itemPath>enemigo.h</itemPath>
+          <itemPath>utils.h</itemPath>
+          <itemPath>enemigo.c</itemPath>
         </logicalFolder>
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>../../../Proyecto/Proyecto.X/platform/LIS3DH/LIS3DH.c</itemPath>

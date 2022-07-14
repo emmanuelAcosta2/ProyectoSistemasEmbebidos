@@ -43,6 +43,10 @@
 extern "C" {
 #endif
 
+#ifndef  EXTERN
+#define  EXTERN  extern
+#endif
+
 
     /* ************************************************************************** */
     /* ************************************************************************** */
@@ -112,7 +116,6 @@ extern "C" {
 
     extern Accel_t accel;
 
-
     typedef struct {
         double_t posicion_x;
         double_t posicion_y;
@@ -122,19 +125,22 @@ extern "C" {
         double_t vInicialY;
         double_t vFinalX;
         double_t vFinalY;
+        int ledActual;
     } pelota;
 
-
+    EXTERN pelota structCoordenadas;
     //Funcion para calcular coordenadas polares
+
+    
     
     void getCoordenadaPolar();
-    
+
     void calcularOctante();
-    
+
     void calcularPosicionXY();
-    
+
     //
-    
+
     void leerValoresAcelerometro(void *params);
 
 

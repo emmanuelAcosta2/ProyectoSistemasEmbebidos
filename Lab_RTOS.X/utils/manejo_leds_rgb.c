@@ -135,6 +135,14 @@ void setLEDRGBComun(int ledNum, int colorNum) {
     // Establece el color del LED indicado, sin modificar el estado de los otros
     // LED.
     //
+    if(ledNum == 5){
+        bool hola = true;
+    }
+    int i;
+    //recorrer el array de leds y asignarle el color OFF.
+    for (i = 0; i < CANTIDAD_LEDS; i++) {
+        arrayLed[i] = OFF;
+    }
     arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
     WS2812_send(arrayLed, CANTIDAD_LEDS);
 
@@ -158,6 +166,7 @@ void setLEDRGBPorColor(int ledNum, int rgbValues[]) {
 
     // Establece el color del LED indicado, sin modificar el estado de los otros
     // LED.
+    
     arrayLed[mapearLeds(ledNum)] = tempLED;
     WS2812_send(arrayLed, CANTIDAD_LEDS);
 
