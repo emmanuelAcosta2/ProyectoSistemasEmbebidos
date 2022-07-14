@@ -134,14 +134,19 @@ int * caminoMasCorto() {
         // porque si no sigue en ese lugar tenemos que irnos a otro lado y volver a calcular
         int octanteBlanca = enemigo.octanteBlanco;
         for (int i = 0; i < distancia; i++) {
-            if (enemigo.octanteEnemigo == 0) {
-                enemigo.octanteEnemigo = 8;
-            }
+            // i = 0, 4... octanteEnemigo es 4
 
-            if ((enemigo.octanteEnemigo - 1) != octanteBlanca) {
-                prenderLedEnemigo(enemigo.octanteEnemigo == 0 ? 8 : (enemigo.octanteEnemigo - 1), octanteBlanca);
+
+            if ((enemigo.octanteEnemigo) != octanteBlanca) {
+                if (enemigo.octanteEnemigo != 1) {
+                    --enemigo.octanteEnemigo;
+                } else {
+                    enemigo.octanteEnemigo = 8;
+                }
+
+                prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
             }
-            enemigo.octanteEnemigo--;
+            //enemigo.octanteEnemigo--;
 
             //Si son distintos...
 
@@ -161,13 +166,22 @@ int * caminoMasCorto() {
             prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
         }
         for (int i = 0; i < distancia; i++) {
-            if (enemigo.octanteEnemigo == 9) {
+            /*if (enemigo.octanteEnemigo == 8) {
                 enemigo.octanteEnemigo = 1;
+            }*/
+            if ((enemigo.octanteEnemigo) != octanteBlanca) {
+                if (enemigo.octanteEnemigo > enemigo.octanteBlanco) {
+                    --enemigo.octanteEnemigo;
+                } else if (enemigo.octanteEnemigo < enemigo.octanteBlanco) {
+                    if (enemigo.octanteEnemigo == 8) {
+                        enemigo.octanteEnemigo = 1;
+                    } else {
+                        ++enemigo.octanteEnemigo;
+                    }
+                }
+                prenderLedEnemigo((enemigo.octanteEnemigo), octanteBlanca);
             }
-            if ((enemigo.octanteEnemigo + 1) != octanteBlanca) {
-                prenderLedEnemigo(enemigo.octanteEnemigo == 8 ? 1 : (enemigo.octanteEnemigo + 1), octanteBlanca);
-            }
-            enemigo.octanteEnemigo++;
+            //enemigo.octanteEnemigo++;
             //prenderLedEnemigo(enemigo.octanteEnemigo);
             obtenerOctanteBlanca();
             if (octanteBlanca != enemigo.octanteBlanco) {
