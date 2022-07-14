@@ -38,7 +38,7 @@ typedef struct {
     int color;
 } queueStruct;
 
-extern SemaphoreHandle_t xSemaphoreMutex;
+extern SemaphoreHandle_t semaforoStructCoordenadas;
 
 extern QueueHandle_t xQueueComandos;
 
@@ -52,9 +52,11 @@ char* ultimoLedModificado();
 
 void apagarLeds();
 
-void setLEDRGBComun(int ledNum, int colorNum);
+void setLEDRGBBlanca(int ledNum, int colorNum);
 
-void setLEDRGBPorColor(int ledNum, int valoresRGB[]);
+void setLEDRGBEnemigo(int ledNum, int colorNum, int octanteBlanca);
+
+int mapearEnemigo(int octante);
 
 void consumirComandosQueue( void *params );
 

@@ -8,6 +8,8 @@
 #include "../mcc_generated_files/rtcc.h"
 #include "manejo_leds_rgb.h"
 #include "mensajes.h"
+#include "../utils.h"
+#include "../enemigo.h"
 
 #define CANTIDAD_LEDS 8            
 
@@ -20,11 +22,42 @@
 ws2812_t arrayLed[CANTIDAD_LEDS]; // Conjunto de los LED RGB de la placa
 
 app_register_t ultimoLedModificadoAppRegister; // Ultimo led modificado
-
+EXTERN enemigoStruct enemigo;
 char valoresUtimoLed[150]; // String con los valores del ultimo led modificado
 
-SemaphoreHandle_t xSemaphoreMutex;
+SemaphoreHandle_t semaforoStructCoordenadas;
+SemaphoreHandle_t semaforoArrayLedsYSend;
 QueueHandle_t xQueueComandos;
+
+int mapearEnemigo(int octante) {
+    switch (octante) {
+        case 1:
+            return 3;
+
+        case 2:
+            return 2;
+
+        case 3:
+            return 1;
+
+        case 4:
+            return 4;
+
+        case 5:
+            return 6;
+
+        case 6:
+            return 7;
+
+        case 7:
+            return 8;
+
+        case 8:
+            return 5;
+
+    }
+
+}
 
 /**
  * Correspondencia entre el led ingresado y el led de la placa
@@ -131,50 +164,71 @@ void apagarLeds() {
  * @param ledNum
  * @param colorNum
  */
-void setLEDRGBComun(int ledNum, int colorNum) {
+void setLEDRGBBlanca(int ledNum, int colorNum) {
+    if (semaforoArrayLedsYSend != NULL) {
+        /* See if we can obtain the semaphore.  If the semaphore is not
+        available wait 10 ticks to see if it becomes free. */
+        if (xSemaphoreTake(semaforoArrayLedsYSend, (TickType_t) 10) == pdTRUE) {
+            int i;
+            //recorrer el array de leds y asignarle el color OFF.
+            for (i = 0; i < CANTIDAD_LEDS; i++) {
+                /*if(i == enemigo.octanteEnemigo){
+                    continue;
+                }*/
+                arrayLed[i] = OFF;
+
+
+            }
+            arrayLed[mapearLeds(mapearEnemigo(enemigo.octanteEnemigo))] = obtenerColor(1);
+            arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
+            WS2812_send(arrayLed, CANTIDAD_LEDS);
+
+
+            // Actualiza los datos del último LED modificado
+            ultimoLedModificadoAppRegister.led = ledNum;
+            ultimoLedModificadoAppRegister.color = colorNum;
+            RTCC_TimeGet(&ultimoLedModificadoAppRegister.time);
+            xSemaphoreGive(semaforoArrayLedsYSend);
+        } else {
+            /* We could not obtain the semaphore and can therefore not access
+            the shared resource safely. */
+        }
+    }
     // Establece el color del LED indicado, sin modificar el estado de los otros
     // LED.
-    //
-    if(ledNum == 5){
-        bool hola = true;
-    }
-    int i;
-    //recorrer el array de leds y asignarle el color OFF.
-    for (i = 0; i < CANTIDAD_LEDS; i++) {
-        arrayLed[i] = OFF;
-    }
-    arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
-    WS2812_send(arrayLed, CANTIDAD_LEDS);
 
-
-    // Actualiza los datos del último LED modificado
-    ultimoLedModificadoAppRegister.led = ledNum;
-    ultimoLedModificadoAppRegister.color = colorNum;
-    RTCC_TimeGet(&ultimoLedModificadoAppRegister.time);
 }
 
-/** 
- * Edita el color de un LED RGB de forma avanzada, al indicar el número de LED y
- * los valores RGB del color que adquirirá.
- * @param ledNum
- * @param colorNum
- */
-void setLEDRGBPorColor(int ledNum, int rgbValues[]) {
-    // Genera una nueva estructura para el color personalizado que indicó el
-    // usuario.
-    ws2812_t tempLED = {rgbValues[0], rgbValues[1], rgbValues[2]};
+void setLEDRGBEnemigo(int ledNum, int colorNum, int octanteBlanca) {
+    if (semaforoArrayLedsYSend != NULL) {
+        /* See if we can obtain the semaphore.  If the semaphore is not
+        available wait 10 ticks to see if it becomes free. */
+        if (xSemaphoreTake(semaforoArrayLedsYSend, (TickType_t) 10) == pdTRUE) {
+            int i;
+            //recorrer el array de leds y asignarle el color OFF.
+            for (i = 0; i < CANTIDAD_LEDS; i++) {
+                //if (i == colorNum) {
+                //    arrayLed[i] = OFF;
+                //}
+            }
+            arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
+            WS2812_send(arrayLed, CANTIDAD_LEDS);
+            xSemaphoreGive(semaforoArrayLedsYSend);
+            vTaskDelay(pdMS_TO_TICKS(1000));
 
+            // Actualiza los datos del último LED modificado
+            ultimoLedModificadoAppRegister.led = ledNum;
+            ultimoLedModificadoAppRegister.color = colorNum;
+            RTCC_TimeGet(&ultimoLedModificadoAppRegister.time);
+
+        } else {
+            /* We could not obtain the semaphore and can therefore not access
+            the shared resource safely. */
+        }
+    }
     // Establece el color del LED indicado, sin modificar el estado de los otros
     // LED.
-    
-    arrayLed[mapearLeds(ledNum)] = tempLED;
-    WS2812_send(arrayLed, CANTIDAD_LEDS);
 
-
-    // Actualiza los datos del último LED modificado
-    ultimoLedModificadoAppRegister.led = ledNum;
-    ultimoLedModificadoAppRegister.color = -1;
-    RTCC_TimeGet(&ultimoLedModificadoAppRegister.time);
 }
 
 /**
@@ -187,31 +241,31 @@ void consumirComandosQueue(void *params) {
     for (;;) {
         //TOMAR SEMAFORO DEL QUEUE
         //if (xSemaphoreMutex != NULL) {
-            /* See if we can obtain the semaphore.  If the semaphore is not
-            available wait 10 ticks to see if it becomes free. */
-          //  if (xSemaphoreTake(xSemaphoreMutex, (TickType_t) 10) == pdTRUE) {
-                //Quitar del queue
-                if (xQueueComandos != NULL) {
-                    queueStruct* ptr;
-                    /* Receive a message from the created queue to hold complex struct AMessage
-                    structure.  Block for 10 ticks if a message is not immediately available.
-                    The value is read into a struct AMessage variable, so after calling
-                    xQueueReceive() xRxedStructure will hold a copy of xMessage. */
-                    if (xQueueReceive(xQueueComandos,
-                            (&ptr),
-                            (TickType_t) 10) == pdPASS) {
-                        //LLAMAR AL SETEO DEL LED
-                        setLEDRGBComun((*ptr).numeroLed, (*ptr).color);
-                    }
-                }
-                //LIBERAR SEMAFORO DEL QUEUE
-            //    xSemaphoreGive(xSemaphoreMutex);
-            //} else {
-            //    /* We could not obtain the semaphore and can therefore not access
-             //   the shared resource safely. */
-            //}
+        /* See if we can obtain the semaphore.  If the semaphore is not
+        available wait 10 ticks to see if it becomes free. */
+        //  if (xSemaphoreTake(xSemaphoreMutex, (TickType_t) 10) == pdTRUE) {
+        //Quitar del queue
+        if (xQueueComandos != NULL) {
+            queueStruct* ptr;
+            /* Receive a message from the created queue to hold complex struct AMessage
+            structure.  Block for 10 ticks if a message is not immediately available.
+            The value is read into a struct AMessage variable, so after calling
+            xQueueReceive() xRxedStructure will hold a copy of xMessage. */
+            if (xQueueReceive(xQueueComandos,
+                    (&ptr),
+                    (TickType_t) 10) == pdPASS) {
+                //LLAMAR AL SETEO DEL LED
+                setLEDRGBBlanca((*ptr).numeroLed, (*ptr).color);
+            }
         }
+        //LIBERAR SEMAFORO DEL QUEUE
+        //    xSemaphoreGive(xSemaphoreMutex);
+        //} else {
+        //    /* We could not obtain the semaphore and can therefore not access
+        //   the shared resource safely. */
+        //}
     }
+}
 
 
 

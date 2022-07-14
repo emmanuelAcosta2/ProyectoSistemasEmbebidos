@@ -29,7 +29,9 @@ extern "C" {
     
 
 
-extern SemaphoreHandle_t xSemaphoreMutex;
+extern SemaphoreHandle_t semaforoStructCoordenadas;
+extern SemaphoreHandle_t semaforoArrayLedsYSend;
+extern SemaphoreHandle_t semaforoStructEnemigo;
 
 
     /* Provide C++ Compatibility */

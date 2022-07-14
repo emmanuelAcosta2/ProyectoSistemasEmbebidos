@@ -10,6 +10,7 @@
 #define EXTERN
 
 EXTERN enemigoStruct enemigo;
+SemaphoreHandle_t semaforoStructEnemigo;
 
 int octanteEnemigoInicial() {
     int octante = 5;
@@ -36,14 +37,14 @@ void moverEnemigo(void *params) {
 }
 
 void obtenerOctanteBlanca() {
-    if (xSemaphoreMutex != NULL) {
+    if (semaforoStructCoordenadas != NULL) {
         /* See if we can obtain the semaphore.  If the semaphore is not
         available wait 10 ticks to see if it becomes free. */
-        if (xSemaphoreTake(xSemaphoreMutex, (TickType_t) 10) == pdTRUE) {
+        if (xSemaphoreTake(semaforoStructCoordenadas, (TickType_t) 10) == pdTRUE) {
 
-            enemigo.octanteBlanco = structCoordenadas.ledActual;
+            enemigo.octanteBlanco = structCoordenadas.octanteActualBlanca;
 
-            xSemaphoreGive(xSemaphoreMutex);
+            xSemaphoreGive(semaforoStructCoordenadas);
         } else {
             /* We could not obtain the semaphore and can therefore not access
             the shared resource safely. */
@@ -51,8 +52,34 @@ void obtenerOctanteBlanca() {
     }
 }
 
-void prenderLedEnemigo(int octante) {
-    setLEDRGBComun(octante, 1);
+void prenderLedEnemigo(int octante, int octanteBlanca) {
+    switch (octante) {
+        case 1:
+            setLEDRGBEnemigo(3, 1, octanteBlanca);
+            break;
+        case 2:
+            setLEDRGBEnemigo(2, 1, octanteBlanca);
+            break;
+        case 3:
+            setLEDRGBEnemigo(1, 1, octanteBlanca);
+            break;
+        case 4:
+            setLEDRGBEnemigo(4, 1, octanteBlanca);
+            break;
+        case 5:
+            setLEDRGBEnemigo(6, 1, octanteBlanca);
+            break;
+        case 6:
+            setLEDRGBEnemigo(7, 1, octanteBlanca);
+            break;
+        case 7:
+            setLEDRGBEnemigo(8, 1, octanteBlanca);
+            break;
+        case 8:
+            setLEDRGBEnemigo(5, 1, octanteBlanca);
+            break;
+    }
+
 }
 
 /**
@@ -110,29 +137,44 @@ int * caminoMasCorto() {
             if (enemigo.octanteEnemigo == 0) {
                 enemigo.octanteEnemigo = 8;
             }
+
+            if ((enemigo.octanteEnemigo - 1) != octanteBlanca) {
+                prenderLedEnemigo(enemigo.octanteEnemigo == 0 ? 8 : (enemigo.octanteEnemigo - 1), octanteBlanca);
+            }
             enemigo.octanteEnemigo--;
-            prenderLedEnemigo(enemigo.octanteEnemigo);
+
+            //Si son distintos...
+
+
             obtenerOctanteBlanca();
+            //Si obtenemos de nuevo la octante blanca y no esta en el mismo lugar tenemos que volver a calcular.
             if (octanteBlanca != enemigo.octanteBlanco) {
                 break;
             }
             //aplico delay
-            vTaskDelay(pdMS_TO_TICKS(1000));
+
         }
     } else {
+
         int octanteBlanca = enemigo.octanteBlanco;
+        if (distancia == 0) {
+            prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
+        }
         for (int i = 0; i < distancia; i++) {
             if (enemigo.octanteEnemigo == 9) {
                 enemigo.octanteEnemigo = 1;
             }
+            if ((enemigo.octanteEnemigo + 1) != octanteBlanca) {
+                prenderLedEnemigo(enemigo.octanteEnemigo == 8 ? 1 : (enemigo.octanteEnemigo + 1), octanteBlanca);
+            }
             enemigo.octanteEnemigo++;
-            prenderLedEnemigo(enemigo.octanteEnemigo);
+            //prenderLedEnemigo(enemigo.octanteEnemigo);
             obtenerOctanteBlanca();
             if (octanteBlanca != enemigo.octanteBlanco) {
                 break;
             }
             //aplico delay
-            vTaskDelay(pdMS_TO_TICKS(1000));
+
         }
     }
 

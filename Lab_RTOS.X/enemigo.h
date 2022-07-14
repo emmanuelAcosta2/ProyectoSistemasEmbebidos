@@ -41,7 +41,7 @@ extern "C" {
     //calcular el camino mas corto
     int *  caminoMasCorto();
     
-    void prenderLedEnemigo(int octante);
+    void prenderLedEnemigo(int octante,int octanteBlanca);
     
     void obtenerOctanteBlanca();
     

@@ -126,6 +126,7 @@ extern "C" {
         double_t vFinalX;
         double_t vFinalY;
         int ledActual;
+        int octanteActualBlanca;
     } pelota;
 
     EXTERN pelota structCoordenadas;

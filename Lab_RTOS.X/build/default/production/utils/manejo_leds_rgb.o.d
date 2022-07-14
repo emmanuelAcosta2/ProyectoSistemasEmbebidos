@@ -8,7 +8,8 @@ build/default/production/utils/manejo_leds_rgb.o: utils/manejo_leds_rgb.c \
  freeRTOS/portable/MPLAB/PIC32MM/portmacro.h \
  utils/../freeRTOS/include/mpu_wrappers.h \
  utils/../freeRTOS/include/semphr.h utils/../freeRTOS/include/queue.h \
- utils/mensajes.h
+ utils/mensajes.h utils/../utils.h utils/.././freeRTOS/include/FreeRTOS.h \
+ utils/.././freeRTOS/include/semphr.h utils/../enemigo.h
 
 utils/WS2812.h:
 
@@ -35,3 +36,11 @@ utils/../freeRTOS/include/semphr.h:
 utils/../freeRTOS/include/queue.h:
 
 utils/mensajes.h:
+
+utils/../utils.h:
+
+utils/.././freeRTOS/include/FreeRTOS.h:
+
+utils/.././freeRTOS/include/semphr.h:
+
+utils/../enemigo.h:

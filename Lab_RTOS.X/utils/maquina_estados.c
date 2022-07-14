@@ -306,10 +306,10 @@ void ingreseTiempo33() {
                 //PONER DIRECTAMENTE EN EL QUEUE
 
                 //TOMAR SEMAFORO
-                if (xSemaphoreMutex != NULL) {
+                if (semaforoStructCoordenadas != NULL) {
                     /* See if we can obtain the semaphore.  If the semaphore is not
                     available wait 10 ticks to see if it becomes free. */
-                    if (xSemaphoreTake(xSemaphoreMutex, (TickType_t) 10) == pdTRUE) {
+                    if (xSemaphoreTake(semaforoStructCoordenadas, (TickType_t) 10) == pdTRUE) {
                         //Quitar del queue
                         //PONER COMANDO EN EL QUEUE
 
@@ -323,7 +323,7 @@ void ingreseTiempo33() {
                             }
                             free(ptr);
                         }
-                        xSemaphoreGive(xSemaphoreMutex);
+                        xSemaphoreGive(semaforoStructCoordenadas);
                     } else {
                         /* We could not obtain the semaphore and can therefore not access
                         the shared resource safely. */

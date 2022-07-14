@@ -86,45 +86,11 @@ void getCoordenadaPolar() {
 void calcularOctante() {
 
     double_t angulo = structCoordenadas.angulo;
-    if (xSemaphoreMutex != NULL) {
+    if (semaforoStructCoordenadas != NULL) {
 
-        if (xSemaphoreTake(xSemaphoreMutex, (TickType_t) 10) == pdTRUE) {
+        if (xSemaphoreTake(semaforoStructCoordenadas, (TickType_t) 10) == pdTRUE) {
 
-            /*  if (angulo > 0 && angulo <= (180.0 / 4)) {
-                  //OCTANTE 1
-                  structCoordenadas.ledActual = 3;
-                  setLEDRGBComun(3, 0);
-              } else if (angulo > (180.0 / 4) && angulo <= (180.0 / 2)) {
-                  //Octante2
-                  structCoordenadas.ledActual = 2;
-                  setLEDRGBComun(2, 0);
-              } else if (angulo > (180.0 / 2) && angulo <= ((3 * 180.0) / 4)) {
-                  //Octante 3
-                  structCoordenadas.ledActual = 1;
-                  setLEDRGBComun(1, 0);
-              } else if (angulo > ((3 * 180.0) / 4) && angulo <= 180.0) {
-                  //Octante 4
-                  structCoordenadas.ledActual = 4;
-                  setLEDRGBComun(4, 0);
-              } else if (angulo > -180.0 && angulo <= ((-3 * 180.0) / 4)) {
-                  //Octante 5
-                  structCoordenadas.ledActual = 6;
-                  setLEDRGBComun(6, 0);
-              } else if (angulo > ((-3 * 180.0) / 4) && angulo <= ((-180.0) / 2)) {
-                  //Octante 6
-                  structCoordenadas.ledActual = 7;
-                  setLEDRGBComun(7, 0);
-              } else if (angulo > ((-180.0) / 2) && angulo <= ((-180.0) / 4)) {
-                  //Octante 7
-                  structCoordenadas.ledActual = 8;
-                  setLEDRGBComun(8, 0);
-              } else if (angulo > ((-180.0) / 4) && angulo <= 0) {
-                  //Octante 8
-                  structCoordenadas.ledActual = 5;
-                  setLEDRGBComun(5, 0);
-              }
-             */
-            bool entrarAlBloque = true;
+            /*bool entrarAlBloque = true;
             if (accel.Accel_Y >= 0 && structCoordenadas.posicion_y <= 0
                     || accel.Accel_Y <= 0 && structCoordenadas.posicion_y >= 0) {
                 entrarAlBloque = false;
@@ -133,46 +99,63 @@ void calcularOctante() {
                     || accel.Accel_X <= 0 && structCoordenadas.posicion_x >= 0) {
                 entrarAlBloque = false;
             }
+             
+            
+             
+             * octante actual y lo actualizamos cada vez que entramos.. 
+             * Para calcular la distancia, tengo el octante actual de la pelota blanca
+             * tenemos que tener guardado la correspondencia octante -> led...
 
-            if (entrarAlBloque) {
-                //apagarLeds();
-                if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y > 0 && (structCoordenadas.posicion_x > structCoordenadas.posicion_y)) {
-                    //OCTANTE 1
-                    structCoordenadas.ledActual = 3;
-                    setLEDRGBComun(3, 0);
-                } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y > 0 && (structCoordenadas.posicion_x < structCoordenadas.posicion_y)) {
-                    //Octante2
-                    structCoordenadas.ledActual = 2;
-                    setLEDRGBComun(2, 0);
-                } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y > 0 && (fabs(structCoordenadas.posicion_x) < structCoordenadas.posicion_y)) {
-                    //Octante 3
-                    structCoordenadas.ledActual = 1;
-                    setLEDRGBComun(1, 0);
-                } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y > 0 && (fabs(structCoordenadas.posicion_x) > structCoordenadas.posicion_y)) {
-                    //Octante 4
-                    structCoordenadas.ledActual = 4;
-                    setLEDRGBComun(4, 1);
-                } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) > fabs(structCoordenadas.posicion_y))) {
-                    //Octante 5
-                    structCoordenadas.ledActual = 6;
-                    setLEDRGBComun(6, 0);
-                } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) < fabs(structCoordenadas.posicion_y))) {
-                    //Octante 6
-                    structCoordenadas.ledActual = 7;
-                    setLEDRGBComun(7, 0);
-                } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y < 0 && (structCoordenadas.posicion_x < fabs(structCoordenadas.posicion_y))) {
-                    //Octante 7
-                    structCoordenadas.ledActual = 8;
-                    setLEDRGBComun(8, 0);
-                } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) > fabs(structCoordenadas.posicion_y))) {
-                    //Octante 8
-                    structCoordenadas.ledActual = 5;
-                    setLEDRGBComun(5, 0);
-                }
-            }
-            xSemaphoreGive(xSemaphoreMutex);
+            if (entrarAlBloque) {*/
+            //apagarLeds();
+            if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y > 0 && (structCoordenadas.posicion_x > structCoordenadas.posicion_y)) {
+                //OCTANTE 1
+                structCoordenadas.ledActual = 3;
+                structCoordenadas.octanteActualBlanca = 1;
+                setLEDRGBBlanca(3, 0);
+            } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y > 0 && (structCoordenadas.posicion_x < structCoordenadas.posicion_y)) {
+                //Octante2
+                structCoordenadas.octanteActualBlanca = 2;
+                structCoordenadas.ledActual = 2;
+                setLEDRGBBlanca(2, 0);
+            } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y > 0 && (fabs(structCoordenadas.posicion_x) < structCoordenadas.posicion_y)) {
+                //Octante 3
+                structCoordenadas.octanteActualBlanca = 3;
+                structCoordenadas.ledActual = 1;
+                setLEDRGBBlanca(1, 0);
+            } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y > 0 && (fabs(structCoordenadas.posicion_x) > structCoordenadas.posicion_y)) {
+                //Octante 4
+                structCoordenadas.octanteActualBlanca = 4;
+                structCoordenadas.ledActual = 4;
+                setLEDRGBBlanca(4, 0);
+            } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) > fabs(structCoordenadas.posicion_y))) {
+                //Octante 5
+                structCoordenadas.octanteActualBlanca = 5;
+                structCoordenadas.ledActual = 6;
+                setLEDRGBBlanca(6, 0);
+            } else if (structCoordenadas.posicion_x < 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) < fabs(structCoordenadas.posicion_y))) {
+                //Octante 6
+                structCoordenadas.octanteActualBlanca = 6;
+                structCoordenadas.ledActual = 7;
+                setLEDRGBBlanca(7, 0);
+            } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y < 0 && (structCoordenadas.posicion_x < fabs(structCoordenadas.posicion_y))) {
+                //Octante 7
+                structCoordenadas.octanteActualBlanca = 7;
+                structCoordenadas.ledActual = 8;
+                setLEDRGBBlanca(8, 0);
+            } else if (structCoordenadas.posicion_x > 0 && structCoordenadas.posicion_y < 0 && (fabs(structCoordenadas.posicion_x) > fabs(structCoordenadas.posicion_y))) {
+                //Octante 8
+                structCoordenadas.octanteActualBlanca = 8;
+                structCoordenadas.ledActual = 5;
+                setLEDRGBBlanca(5, 0);
+                // }
+            }/*else{
+                //Placa horizontal
+                setLEDRGBComun(structCoordenadas.ledActual, 0);
+            }*/
+            xSemaphoreGive(semaforoStructCoordenadas);
         } else {
-
+            
         }
     }
 
@@ -231,6 +214,7 @@ void calcularAnguloDesdeAceleracion() {
 }
 
 void leerValoresAcelerometro(void *params) {
+    structCoordenadas.ledActual = 1;
 
     TickType_t timeToSleep = pdMS_TO_TICKS(10);
 

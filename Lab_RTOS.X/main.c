@@ -80,18 +80,20 @@ void blinkLED(void *p_param);
 int main(void) {
     // initialize the device
     SYSTEM_Initialize();
-    
-    xSemaphoreMutex = xSemaphoreCreateMutex();
+
+    semaforoStructCoordenadas = xSemaphoreCreateMutex();
+    semaforoArrayLedsYSend = xSemaphoreCreateMutex();
+    semaforoStructEnemigo = xSemaphoreCreateMutex();
 
     //Wait for accel init. If false repeat.
     while (!ACCEL_init()) {
-
+        
     }
 
-    
-    
-    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE*10, NULL, tskIDLE_PRIORITY + 1, NULL);
-    //xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+
+
+    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE * 10, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY*10 + 1, NULL);
 
     /* Finally start the scheduler. */
     vTaskStartScheduler();
