@@ -54,7 +54,7 @@ void apagarLeds();
 
 void setLEDRGBBlanca(int ledNum, int colorNum);
 
-void setLEDRGBEnemigo(int ledNum, int colorNum, int octanteBlanca);
+void setLEDRGBEnemigo(int ledNum, int colorNum, int milisegundosEnemigo);
 
 int mapearEnemigo(int octante);
 

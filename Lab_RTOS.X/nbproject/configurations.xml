@@ -93,6 +93,10 @@
           <itemPath>enemigo.h</itemPath>
           <itemPath>utils.h</itemPath>
           <itemPath>enemigo.c</itemPath>
+          <itemPath>sonidos.h</itemPath>
+          <itemPath>sonidos.c</itemPath>
+          <itemPath>timers.h</itemPath>
+          <itemPath>timers.c</itemPath>
         </logicalFolder>
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>../../../Proyecto/Proyecto.X/platform/LIS3DH/LIS3DH.c</itemPath>

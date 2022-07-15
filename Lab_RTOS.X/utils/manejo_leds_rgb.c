@@ -199,7 +199,7 @@ void setLEDRGBBlanca(int ledNum, int colorNum) {
 
 }
 
-void setLEDRGBEnemigo(int ledNum, int colorNum, int octanteBlanca) {
+void setLEDRGBEnemigo(int ledNum, int colorNum, int milisegundosEnemigo) {
     if (semaforoArrayLedsYSend != NULL) {
         /* See if we can obtain the semaphore.  If the semaphore is not
         available wait 10 ticks to see if it becomes free. */
@@ -214,7 +214,7 @@ void setLEDRGBEnemigo(int ledNum, int colorNum, int octanteBlanca) {
             arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
             WS2812_send(arrayLed, CANTIDAD_LEDS);
             xSemaphoreGive(semaforoArrayLedsYSend);
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            vTaskDelay(pdMS_TO_TICKS(milisegundosEnemigo));
 
             // Actualiza los datos del último LED modificado
             ultimoLedModificadoAppRegister.led = ledNum;

@@ -238,6 +238,188 @@ inline static void LED_CTRL_SetValue(bool value)
 #define LED_CTRL_SetDigitalOutput()   ( TRISACLR = (1 << 10) )
 /**
   @Summary
+    Sets the GPIO pin, RA12, high using LATA12.
+
+  @Description
+    Sets the GPIO pin, RA12, high using LATA12.
+
+  @Preconditions
+    The RA12 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RA12 high (1)
+    BUZ_CTRL_SetHigh();
+    </code>
+
+*/
+#define BUZ_CTRL_SetHigh()          ( LATASET = (1 << 12) )
+/**
+  @Summary
+    Sets the GPIO pin, RA12, low using LATA12.
+
+  @Description
+    Sets the GPIO pin, RA12, low using LATA12.
+
+  @Preconditions
+    The RA12 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RA12 low (0)
+    BUZ_CTRL_SetLow();
+    </code>
+
+*/
+#define BUZ_CTRL_SetLow()           ( LATACLR = (1 << 12) )
+
+/**
+  @Summary
+    Sets a value to the GPIO pin.
+
+  @Description
+    Sets or Resets the GPIO pin, RA12, low or high using LATA12.
+
+  @Preconditions
+    The RA12 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    bool value; : value to be set to the GPIO pin.
+
+  @Example
+    <code>
+    // Set RA12 to low.
+    BUZ_CTRL_SetValue(false);
+    </code>
+
+*/
+inline static void BUZ_CTRL_SetValue(bool value)
+{
+  if(value)
+  {
+    BUZ_CTRL_SetHigh();
+  }
+  else
+  {
+    BUZ_CTRL_SetLow();
+  }
+}
+
+/**
+  @Summary
+    Toggles the GPIO pin, RA12, using LATA12.
+
+  @Description
+    Toggles the GPIO pin, RA12, using LATA12.
+
+  @Preconditions
+    The RA12 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RA12
+    BUZ_CTRL_Toggle();
+    </code>
+
+*/
+#define BUZ_CTRL_Toggle()           ( LATAINV = (1 << 12) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RA12.
+
+  @Description
+    Reads the value of the GPIO pin, RA12.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RA12
+    postValue = BUZ_CTRL_GetValue();
+    </code>
+
+*/
+#define BUZ_CTRL_GetValue()         PORTAbits.RA12
+/**
+  @Summary
+    Configures the GPIO pin, RA12, as an input.
+
+  @Description
+    Configures the GPIO pin, RA12, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RA12 as an input
+    BUZ_CTRL_SetDigitalInput();
+    </code>
+
+*/
+#define BUZ_CTRL_SetDigitalInput()   ( TRISASET = (1 << 12) )
+/**
+  @Summary
+    Configures the GPIO pin, RA12, as an output.
+
+  @Description
+    Configures the GPIO pin, RA12, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RA12 as an output
+    BUZ_CTRL_SetDigitalOutput();
+    </code>
+
+*/
+#define BUZ_CTRL_SetDigitalOutput()   ( TRISACLR = (1 << 12) )
+/**
+  @Summary
     Sets the GPIO pin, RA13, high using LATA13.
 
   @Description

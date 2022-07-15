@@ -39,7 +39,7 @@ extern "C" {
     void moverEnemigo(void *params);
     
     //calcular el camino mas corto
-    int *  caminoMasCorto();
+    int *  caminoMasCorto(int tiempoEnMilis);
     
     void prenderLedEnemigo(int octante,int octanteBlanca);
     

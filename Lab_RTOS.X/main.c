@@ -70,30 +70,48 @@
 #include "lectura.h"
 #include "utils.h"
 #include "enemigo.h"
+#include "sonidos.h"
+#include "timers.h"
 
 
 void blinkLED(void *p_param);
+//wait x number of seconds
+
+void delay(int number_of_seconds) {
+    // Converting time into milli_seconds 
+    float milli_seconds = 0.1 * number_of_seconds;
+
+    // Storing start time 
+    clock_t start_time = clock();
+
+    // looping till required time is not achieved 
+    while (clock() < start_time + milli_seconds);
+}
 
 /*
                          Main application
  */
+
+
+
 int main(void) {
     // initialize the device
     SYSTEM_Initialize();
-
+    BUZ_CTRL_SetDigitalOutput();
     semaforoStructCoordenadas = xSemaphoreCreateMutex();
     semaforoArrayLedsYSend = xSemaphoreCreateMutex();
     semaforoStructEnemigo = xSemaphoreCreateMutex();
 
     //Wait for accel init. If false repeat.
     while (!ACCEL_init()) {
-        
+
     }
 
 
 
     xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE * 10, NULL, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY*10 + 1, NULL);
+    xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY * 10 + 1, NULL);
+    xTaskCreate(crearTimers, "timers", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
 
     /* Finally start the scheduler. */
     vTaskStartScheduler();

@@ -11,7 +11,6 @@
 
 EXTERN enemigoStruct enemigo;
 SemaphoreHandle_t semaforoStructEnemigo;
-
 int octanteEnemigoInicial() {
     int octante = 5;
     int numero;
@@ -30,8 +29,14 @@ void moverEnemigo(void *params) {
     //delay que dice cuanto tiempo pasa entre que salta de un octante al otro...
     //El enemigo inicia en un lugar x, distinto de donde inicia el blanco
     //Un determinado tiempo despues (1s)
+    int vueltas = 0;
     for (;;) {
-        caminoMasCorto();
+        vueltas++;
+        if(vueltas == 10){
+            vueltas = 0;
+        }
+            
+        caminoMasCorto(vueltas);
     }
 
 }
@@ -55,28 +60,28 @@ void obtenerOctanteBlanca() {
 void prenderLedEnemigo(int octante, int octanteBlanca) {
     switch (octante) {
         case 1:
-            setLEDRGBEnemigo(3, 1, octanteBlanca);
+            setLEDRGBEnemigo(3, 1, milisegundosEnemigo);
             break;
         case 2:
-            setLEDRGBEnemigo(2, 1, octanteBlanca);
+            setLEDRGBEnemigo(2, 1, milisegundosEnemigo);
             break;
         case 3:
-            setLEDRGBEnemigo(1, 1, octanteBlanca);
+            setLEDRGBEnemigo(1, 1, milisegundosEnemigo);
             break;
         case 4:
-            setLEDRGBEnemigo(4, 1, octanteBlanca);
+            setLEDRGBEnemigo(4, 1, milisegundosEnemigo);
             break;
         case 5:
-            setLEDRGBEnemigo(6, 1, octanteBlanca);
+            setLEDRGBEnemigo(6, 1, milisegundosEnemigo);
             break;
         case 6:
-            setLEDRGBEnemigo(7, 1, octanteBlanca);
+            setLEDRGBEnemigo(7, 1, milisegundosEnemigo);
             break;
         case 7:
-            setLEDRGBEnemigo(8, 1, octanteBlanca);
+            setLEDRGBEnemigo(8, 1, milisegundosEnemigo);
             break;
         case 8:
-            setLEDRGBEnemigo(5, 1, octanteBlanca);
+            setLEDRGBEnemigo(5, 1, milisegundosEnemigo);
             break;
     }
 
@@ -86,7 +91,7 @@ void prenderLedEnemigo(int octante, int octanteBlanca) {
  * El enemigo va solo por la circunferencia
  * @return 
  */
-int * caminoMasCorto() {
+int * caminoMasCorto(int tiempoEnMilis) {
     //obtener la pelota blanca
 
     obtenerOctanteBlanca();

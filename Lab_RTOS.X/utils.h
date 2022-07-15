@@ -25,14 +25,20 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#ifndef  EXTERN
+#define  EXTERN  extern
+#endif
+
+
+
+
+    extern SemaphoreHandle_t semaforoStructCoordenadas;
+    extern SemaphoreHandle_t semaforoArrayLedsYSend;
+    extern SemaphoreHandle_t semaforoStructEnemigo;
+
+    EXTERN int milisegundosEnemigo;
+    EXTERN int tiempoRojo;
     
-    
-
-
-extern SemaphoreHandle_t semaforoStructCoordenadas;
-extern SemaphoreHandle_t semaforoArrayLedsYSend;
-extern SemaphoreHandle_t semaforoStructEnemigo;
-
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus
