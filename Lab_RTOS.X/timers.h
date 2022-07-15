@@ -25,12 +25,13 @@
 extern "C" {
 #endif
 
-void crearTimers(void *params);
-void callbackTimers(TimerHandle_t xTimer);
+    void sumarPuntaje(void *params);
+    void crearTimers(void *params);
+    void callbackTimers(TimerHandle_t xTimer);
 
-    
-    
-    
+
+
+
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus

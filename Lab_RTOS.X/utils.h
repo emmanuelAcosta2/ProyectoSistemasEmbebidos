@@ -21,6 +21,7 @@
 
 #include "./freeRTOS/include/FreeRTOS.h"
 #include "./freeRTOS/include/semphr.h"
+#include <stdbool.h>
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
 extern "C" {
@@ -38,6 +39,8 @@ extern "C" {
 
     EXTERN int milisegundosEnemigo;
     EXTERN int tiempoRojo;
+    EXTERN bool terminoJuego;
+    EXTERN int puntaje;
     
 
     /* Provide C++ Compatibility */

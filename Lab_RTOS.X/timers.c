@@ -3,17 +3,32 @@
 #include "./FreeRTOSConfig.h"
 #include "utils.h"
 #include "sonidos.h"
+#include <stdbool.h>
 
 int tiempoRojo;
 int milisegundosEnemigo;
 int *tiempoPointer;
+bool terminoJuego;
+int puntaje;
+
+void sumarPuntaje(void *params) {
+
+    for (;;) {
+        if (!terminoJuego) {
+            puntaje += 5;
+            vTaskDelay(pdMS_TO_TICKS(1000));
+        } else {
+            vTaskDelete(NULL);
+        }
+    }
+}
 
 void callbackTimers(TimerHandle_t xTimer) {
 
     int* tiempoRojoPointer = (int*) pvTimerGetTimerID(xTimer);
 
 
-    
+
     if ((tiempoRojo) < 150) {
         tiempoRojo = tiempoRojo + 10;
         milisegundosEnemigo = milisegundosEnemigo - 100;
@@ -30,7 +45,7 @@ void callbackTimers(TimerHandle_t xTimer) {
 }
 
 void crearTimers(void *params) {
-    
+
     milisegundosEnemigo = 1500;
 
     //Debe haber un struct que tenga el tiempo
