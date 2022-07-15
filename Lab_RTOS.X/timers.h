@@ -25,9 +25,11 @@
 extern "C" {
 #endif
 
+    extern int *tiempoPointer;
     void sumarPuntaje(void *params);
     void crearTimers(void *params);
     void callbackTimers(TimerHandle_t xTimer);
+    
 
 
 

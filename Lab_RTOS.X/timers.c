@@ -7,18 +7,26 @@
 
 int tiempoRojo;
 int milisegundosEnemigo;
-int *tiempoPointer;
 bool terminoJuego;
+int *tiempoPointer;
 int puntaje;
+TimerHandle_t xTimer;
 
 void sumarPuntaje(void *params) {
 
     for (;;) {
-        if (!terminoJuego) {
-            puntaje += 5;
-            vTaskDelay(pdMS_TO_TICKS(1000));
+        if (estadoBoton1.bandera) {
+            if (!terminoJuego) {
+                puntaje += 5;
+                vTaskDelay(pdMS_TO_TICKS(1000));
+            } else {
+                vTaskDelete(NULL);
+            }
         } else {
-            vTaskDelete(NULL);
+            puntaje = 0;
+            terminoJuego = false;
+            milisegundosEnemigo = 1500;
+            tiempoRojo = 0;
         }
     }
 }
@@ -40,45 +48,35 @@ void callbackTimers(TimerHandle_t xTimer) {
 
 
 
-    xTimerStop(xTimer, 0);
+    //xTimerStop(xTimer, 0);
 
 }
 
 void crearTimers(void *params) {
 
-    milisegundosEnemigo = 1500;
-
-    //Debe haber un struct que tenga el tiempo
-
-    for (int i = 1; i <= 15; i++) {
-        //Crear el timer
-        TimerHandle_t xTimer;
-        xTimer = xTimerCreate
-                (/* Just a text name, not used by the RTOS
+    //Crear el timer
+    xTimer = xTimerCreate
+            (/* Just a text name, not used by the RTOS
                      kernel. */
-                "Timer",
-                /* The timer period in ticks, must be
-                greater than 0. */
-                pdMS_TO_TICKS(10000),
-                /* The timers will auto-reload themselves
-                when they expire. */
-                pdFALSE,
-                /* Aca iria el bloque de memoria creado con malloc que contiene el struct con el numero de led y el color */
-                (void *) tiempoPointer,
-                /* Each timer calls the same callback when
-                it expires. */
-                callbackTimers
-                );
+            "Timer",
+            /* The timer period in ticks, must be
+            greater than 0. */
+            pdMS_TO_TICKS(10000),
+            /* The timers will auto-reload themselves
+            when they expire. */
+            pdTRUE,
+            /* Aca iria el bloque de memoria creado con malloc que contiene el struct con el numero de led y el color */
+            (void *) tiempoPointer,
+            /* Each timer calls the same callback when
+            it expires. */
+            callbackTimers
+            );
 
-        if (xTimerStart(xTimer, 0) != pdPASS) {
-            /* The timer could not be set into the Active
-            state. */
-        }
-        vTaskDelay(10000);
-
+    if (xTimerStart(xTimer, 0) != pdPASS) {
+        /* The timer could not be set into the Active
+        state. */
     }
-
-
-    for (;;);
+    xTimerStop(xTimer,0);
+    vTaskDelete(NULL);
 }
 

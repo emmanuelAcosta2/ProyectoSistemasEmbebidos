@@ -8,7 +8,8 @@ build/default/production/lectura.o: lectura.c lectura.h \
  freeRTOS/include/mpu_wrappers.h utils/delay.h utils/manejo_leds_rgb.h \
  utils/../freeRTOS/include/FreeRTOS.h utils/../freeRTOS/include/semphr.h \
  utils/../freeRTOS/include/queue.h freeRTOS/include/task.h \
- freeRTOS/include/list.h utils.h freeRTOS/include/semphr.h
+ freeRTOS/include/list.h utils.h freeRTOS/include/semphr.h \
+ freeRTOS/include/timers.h freeRTOS/include/task.h
 
 lectura.h:
 
@@ -49,3 +50,7 @@ freeRTOS/include/list.h:
 utils.h:
 
 freeRTOS/include/semphr.h:
+
+freeRTOS/include/timers.h:
+
+freeRTOS/include/task.h:

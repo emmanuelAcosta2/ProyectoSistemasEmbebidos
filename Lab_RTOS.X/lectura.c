@@ -28,6 +28,7 @@ Accel_t *accelPointer;
 
 EXTERN pelota structCoordenadas;
 
+
 void getCoordenadaPolar() {
     //Se accede con el punto porque es la variable en si
     //Si y es negativo, entonces el angulo es el mismo
@@ -155,7 +156,7 @@ void calcularOctante() {
             }*/
             xSemaphoreGive(semaforoStructCoordenadas);
         } else {
-            
+
         }
     }
 
@@ -229,23 +230,24 @@ void leerValoresAcelerometro(void *params) {
 
 
     for (;;) {
-
-        if (!ACCEL_GetAccel(accelPointer)) {
-            return;
+        if (estadoBoton1.bandera) {
+            if (!ACCEL_GetAccel(accelPointer)) {
+                return;
+            }
+            //Umbral 0.7 para el acelerometro.
+            /*if (accel.Accel_X < 0.4 && accel.Accel_X > -0.4) {
+                accel.Accel_X = 0;
+            }
+            if (accel.Accel_Y < 0.4 && accel.Accel_Y > -0.4) {
+                accel.Accel_Y = 0;
+            }*/
+            calcularPosicionXY();
+            getCoordenadaPolar();
+            //calcularAnguloDesdeAceleracion();
+            calcularOctante();
+            //anda a dormir
+            vTaskDelay(timeToSleep);
         }
-        //Umbral 0.7 para el acelerometro.
-        /*if (accel.Accel_X < 0.4 && accel.Accel_X > -0.4) {
-            accel.Accel_X = 0;
-        }
-        if (accel.Accel_Y < 0.4 && accel.Accel_Y > -0.4) {
-            accel.Accel_Y = 0;
-        }*/
-        calcularPosicionXY();
-        getCoordenadaPolar();
-        //calcularAnguloDesdeAceleracion();
-        calcularOctante();
-        //anda a dormir
-        vTaskDelay(timeToSleep);
     }
 
 

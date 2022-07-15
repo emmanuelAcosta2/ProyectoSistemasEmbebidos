@@ -11,6 +11,7 @@
 
 EXTERN enemigoStruct enemigo;
 SemaphoreHandle_t semaforoStructEnemigo;
+
 int octanteEnemigoInicial() {
     int octante = 5;
     int numero;
@@ -31,12 +32,18 @@ void moverEnemigo(void *params) {
     //Un determinado tiempo despues (1s)
     int vueltas = 0;
     for (;;) {
-        vueltas++;
-        if(vueltas == 10){
+        if (estadoBoton1.bandera) {
+            vueltas++;
+            if (vueltas == 10) {
+                vueltas = 0;
+            }
+
+            caminoMasCorto(vueltas);
+           
+        } else {
+            enemigo.octanteEnemigo = octanteEnemigoInicial();
             vueltas = 0;
         }
-            
-        caminoMasCorto(vueltas);
     }
 
 }

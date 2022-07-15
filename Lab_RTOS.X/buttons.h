@@ -39,6 +39,10 @@ extern "C" {
     void boton1_isr(void); 
 
     void boton2_isr(void); 
+    
+    void timer2_isr(void);
+    void BTN1_reset(void) ;
+    void BTN2_reset(void); 
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus

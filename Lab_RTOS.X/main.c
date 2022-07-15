@@ -73,6 +73,7 @@
 #include "sonidos.h"
 #include "timers.h"
 #include "buttons.h"
+#include "reiniciarValores.h"
 
 
 void blinkLED(void *p_param);
@@ -80,6 +81,7 @@ void blinkLED(void *p_param);
 
 int main(void) {
     // initialize the device
+    empezarJuego = false;
     SYSTEM_Initialize();
     BUZ_CTRL_SetDigitalOutput();
     semaforoStructCoordenadas = xSemaphoreCreateMutex();
@@ -92,6 +94,9 @@ int main(void) {
 
     BTN1_SetInterruptHandler(boton1_isr);
     BTN2_SetInterruptHandler(boton2_isr);
+    TMR2_SetInterruptHandler(timer2_isr);
+
+    
 
 
     //Wait for accel init. If false repeat.
@@ -99,12 +104,22 @@ int main(void) {
 
     }
 
+    TaskHandle_t xHandleLeerValores = NULL;
+    TaskHandle_t xHandleMoverEnemigo = NULL;
+    TaskHandle_t xHandleCrearTimers = NULL;
+    TaskHandle_t xHandleSumarPuntaje = NULL;
+
+    //El boton S2, se apreta en dos ocasiones
+    //1-Cuando queres resetear
+    //2-Cuando queres resetear al HS.
 
 
-    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE * 10, NULL, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY * 10 + 1, NULL);
-    xTaskCreate(crearTimers, "timers", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(sumarPuntaje, "sumarPuntajes", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+
+    xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE * 10, NULL, tskIDLE_PRIORITY + 1, &xHandleLeerValores);
+    xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY * 10 + 1, &xHandleMoverEnemigo);
+    xTaskCreate(crearTimers, "timers", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xHandleCrearTimers);
+    xTaskCreate(sumarPuntaje, "sumarPuntajes", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xHandleSumarPuntaje);
+    xTaskCreate(reiniciarValores, "reiniciarValores", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
     /* Finally start the scheduler. */
     vTaskStartScheduler();
 

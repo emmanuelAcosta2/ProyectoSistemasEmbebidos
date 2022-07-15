@@ -18,10 +18,14 @@
 #ifndef UTILS_H    /* Guard against multiple inclusion */
 #define UTILS_H
 
+#include "./freeRTOS/include/FreeRTOS.h"
 
 #include "./freeRTOS/include/FreeRTOS.h"
 #include "./freeRTOS/include/semphr.h"
+#include "./freeRTOS/include/timers.h"
 #include <stdbool.h>
+#include <stdint.h>
+
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
 extern "C" {
@@ -30,8 +34,17 @@ extern "C" {
 #define  EXTERN  extern
 #endif
 
+    typedef struct {
+        uint16_t timer_inicial;
+        bool debounce;
+        bool bandera;
+        bool reiniciar;
+        bool timers;
+    } estadoBoton;
+    EXTERN estadoBoton estadoBoton1;
+    EXTERN estadoBoton estadoBoton2;
 
-
+    EXTERN TimerHandle_t xTimer;
 
     extern SemaphoreHandle_t semaforoStructCoordenadas;
     extern SemaphoreHandle_t semaforoArrayLedsYSend;
@@ -41,7 +54,8 @@ extern "C" {
     EXTERN int tiempoRojo;
     EXTERN bool terminoJuego;
     EXTERN int puntaje;
-    
+    EXTERN bool empezarJuego;
+
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus
