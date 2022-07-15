@@ -81,23 +81,23 @@ void sonidoPerderSuperarHS() {
 }
 
 void sonidoPerderSinSuperarHS() {
-    int var = 10;
-    while (var >= 0) {
-        var--;
-        int i = 200;
-        while (i != 0) {
-            i--;
-            UT_delay(1000);
-            BUZ_CTRL_Toggle();
-        }
-        i = 100;
-        while (i != 0) {
-            i--;
-            UT_delay(5000);
-            BUZ_CTRL_Toggle();
-        }
-        UT_delay(100);
+    //int var = 3;
+    //while (var >= 0) {
+    //  var--;
+    int i = 200;
+    while (i != 0) {
+        i--;
+        UT_delay(1000);
+        BUZ_CTRL_Toggle();
     }
+    i = 100;
+    while (i != 0) {
+        i--;
+        UT_delay(5000);
+        BUZ_CTRL_Toggle();
+    }
+    UT_delay(100);
+    //}
 }
 
 void sonidoAumentarVelocidad() {

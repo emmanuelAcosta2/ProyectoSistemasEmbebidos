@@ -15,18 +15,18 @@ TimerHandle_t xTimer;
 void sumarPuntaje(void *params) {
 
     for (;;) {
-        if (estadoBoton1.bandera) {
-            if (!terminoJuego) {
-                puntaje += 5;
-                vTaskDelay(pdMS_TO_TICKS(1000));
+        if (!terminoJuego) {
+            if (estadoBoton1.bandera) {
+                if (!terminoJuego) {
+                    puntaje += 5;
+                    vTaskDelay(pdMS_TO_TICKS(1000));
+                } 
             } else {
-                vTaskDelete(NULL);
+                puntaje = 0;
+                terminoJuego = false;
+                milisegundosEnemigo = 1500;
+                tiempoRojo = 0;
             }
-        } else {
-            puntaje = 0;
-            terminoJuego = false;
-            milisegundosEnemigo = 1500;
-            tiempoRojo = 0;
         }
     }
 }
@@ -41,9 +41,7 @@ void callbackTimers(TimerHandle_t xTimer) {
         tiempoRojo = tiempoRojo + 10;
         milisegundosEnemigo = milisegundosEnemigo - 100;
         sonidoAumentarVelocidad();
-    } else {
-        vTaskDelete(NULL);
-    }
+    } 
 
 
 
@@ -61,7 +59,7 @@ void crearTimers(void *params) {
             "Timer",
             /* The timer period in ticks, must be
             greater than 0. */
-            pdMS_TO_TICKS(10000),
+            pdMS_TO_TICKS(1000),
             /* The timers will auto-reload themselves
             when they expire. */
             pdTRUE,
@@ -76,7 +74,7 @@ void crearTimers(void *params) {
         /* The timer could not be set into the Active
         state. */
     }
-    xTimerStop(xTimer,0);
+    xTimerStop(xTimer, 0);
     vTaskDelete(NULL);
 }
 

@@ -9,7 +9,8 @@ build/default/production/enemigo.o: enemigo.c enemigo.h utils.h \
  framework/Accelerometer/Accelerometer.h \
  framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h \
  freeRTOS/include/task.h utils/manejo_leds_rgb.h \
- utils/../freeRTOS/include/FreeRTOS.h utils/../freeRTOS/include/semphr.h
+ utils/../freeRTOS/include/FreeRTOS.h utils/../freeRTOS/include/semphr.h \
+ sonidos.h timers.h freeRTOS/include/timers.h
 
 enemigo.h:
 
@@ -52,3 +53,9 @@ utils/manejo_leds_rgb.h:
 utils/../freeRTOS/include/FreeRTOS.h:
 
 utils/../freeRTOS/include/semphr.h:
+
+sonidos.h:
+
+timers.h:
+
+freeRTOS/include/timers.h:

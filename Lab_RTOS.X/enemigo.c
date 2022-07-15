@@ -7,6 +7,8 @@
 #include "task.h"
 #include <stdlib.h>
 #include "utils/manejo_leds_rgb.h"
+#include "sonidos.h"
+#include "timers.h"
 #define EXTERN
 
 EXTERN enemigoStruct enemigo;
@@ -32,17 +34,19 @@ void moverEnemigo(void *params) {
     //Un determinado tiempo despues (1s)
     int vueltas = 0;
     for (;;) {
-        if (estadoBoton1.bandera) {
-            vueltas++;
-            if (vueltas == 10) {
+        if (!terminoJuego) {
+            if (estadoBoton1.bandera) {
+                vueltas++;
+                if (vueltas == 10) {
+                    vueltas = 0;
+                }
+
+                caminoMasCorto(vueltas);
+
+            } else {
+                enemigo.octanteEnemigo = octanteEnemigoInicial();
                 vueltas = 0;
             }
-
-            caminoMasCorto(vueltas);
-           
-        } else {
-            enemigo.octanteEnemigo = octanteEnemigoInicial();
-            vueltas = 0;
         }
     }
 
@@ -175,6 +179,9 @@ int * caminoMasCorto(int tiempoEnMilis) {
 
         int octanteBlanca = enemigo.octanteBlanco;
         if (distancia == 0) {
+            terminoJuego = true;
+            sonidoPerderSinSuperarHS();
+            xTimerStop(xTimer,0);
             prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
         }
         for (int i = 0; i < distancia; i++) {

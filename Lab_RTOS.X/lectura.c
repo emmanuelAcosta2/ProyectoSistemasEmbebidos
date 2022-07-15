@@ -230,7 +230,7 @@ void leerValoresAcelerometro(void *params) {
 
 
     for (;;) {
-        if (estadoBoton1.bandera) {
+        if (estadoBoton1.bandera && !terminoJuego) {
             if (!ACCEL_GetAccel(accelPointer)) {
                 return;
             }

@@ -103,6 +103,8 @@ int main(void) {
     while (!ACCEL_init()) {
 
     }
+    
+    
 
     TaskHandle_t xHandleLeerValores = NULL;
     TaskHandle_t xHandleMoverEnemigo = NULL;

@@ -5,6 +5,7 @@
 #include "freeRTOS/include/FreeRTOS.h"
 #include "enemigo.h"
 #include "timers.h"
+#include "lectura.h"
 #define DELAYDEBOUNCE 50
 
 bool empezarJuego;
@@ -23,16 +24,20 @@ void boton1_isr(void) {
             estadoBoton1.debounce = false;
         }
     }
-    
 
-    xTimerStopFromISR(xTimer,0);
+
+
     xTimerStartFromISR(xTimer,0);
+    xTimerResetFromISR(xTimer,pdMS_TO_TICKS(1000));
 
     estadoBoton1.bandera = true;
     milisegundosEnemigo = 1500;
     tiempoRojo = 0;
     puntaje = 0;
     empezarJuego = true;
+    terminoJuego = false;
+    structCoordenadas.posicion_x = 0;
+    structCoordenadas.posicion_y = 0;
     enemigo.octanteEnemigo = octanteEnemigoInicial();
     estadoBoton1.reiniciar = true;
 
