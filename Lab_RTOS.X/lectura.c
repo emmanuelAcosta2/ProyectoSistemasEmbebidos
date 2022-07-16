@@ -247,6 +247,8 @@ void leerValoresAcelerometro(void *params) {
             calcularOctante();
             //anda a dormir
             vTaskDelay(timeToSleep);
+        }else{
+            apagarLeds();
         }
     }
 

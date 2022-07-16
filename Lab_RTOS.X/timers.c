@@ -18,15 +18,10 @@ void sumarPuntaje(void *params) {
         if (!terminoJuego) {
             if (estadoBoton1.bandera) {
                 if (!terminoJuego) {
-                    puntaje += 5;
+                    puntaje += 1;
                     vTaskDelay(pdMS_TO_TICKS(1000));
                 } 
-            } else {
-                puntaje = 0;
-                terminoJuego = false;
-                milisegundosEnemigo = 1500;
-                tiempoRojo = 0;
-            }
+            } 
         }
     }
 }
@@ -59,7 +54,7 @@ void crearTimers(void *params) {
             "Timer",
             /* The timer period in ticks, must be
             greater than 0. */
-            pdMS_TO_TICKS(1000),
+            pdMS_TO_TICKS(10000),
             /* The timers will auto-reload themselves
             when they expire. */
             pdTRUE,

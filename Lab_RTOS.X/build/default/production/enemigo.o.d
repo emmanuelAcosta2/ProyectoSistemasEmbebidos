@@ -10,7 +10,8 @@ build/default/production/enemigo.o: enemigo.c enemigo.h utils.h \
  framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h \
  freeRTOS/include/task.h utils/manejo_leds_rgb.h \
  utils/../freeRTOS/include/FreeRTOS.h utils/../freeRTOS/include/semphr.h \
- sonidos.h timers.h freeRTOS/include/timers.h
+ sonidos.h timers.h freeRTOS/include/timers.h escribirMemoria.h \
+ mcc_generated_files/memory/flash_demo.h
 
 enemigo.h:
 
@@ -59,3 +60,7 @@ sonidos.h:
 timers.h:
 
 freeRTOS/include/timers.h:
+
+escribirMemoria.h:
+
+mcc_generated_files/memory/flash_demo.h:

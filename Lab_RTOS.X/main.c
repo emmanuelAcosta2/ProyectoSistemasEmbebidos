@@ -74,7 +74,9 @@
 #include "timers.h"
 #include "buttons.h"
 #include "reiniciarValores.h"
-
+#include "mostrarPuntaje.h"
+#include "./mcc_generated_files/memory/flash_demo.h"
+#include "escribirMemoria.h"
 
 void blinkLED(void *p_param);
 //wait x number of seconds
@@ -82,6 +84,7 @@ void blinkLED(void *p_param);
 int main(void) {
     // initialize the device
     empezarJuego = false;
+    terminoJuego = true;
     SYSTEM_Initialize();
     BUZ_CTRL_SetDigitalOutput();
     semaforoStructCoordenadas = xSemaphoreCreateMutex();
@@ -96,9 +99,7 @@ int main(void) {
     BTN2_SetInterruptHandler(boton2_isr);
     TMR2_SetInterruptHandler(timer2_isr);
 
-    
-
-
+   
     //Wait for accel init. If false repeat.
     while (!ACCEL_init()) {
 
@@ -116,12 +117,13 @@ int main(void) {
     //2-Cuando queres resetear al HS.
 
 
-
     xTaskCreate(leerValoresAcelerometro, "leerValores", configMINIMAL_STACK_SIZE * 10, NULL, tskIDLE_PRIORITY + 1, &xHandleLeerValores);
     xTaskCreate(moverEnemigo, "moverEnemigo", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY * 10 + 1, &xHandleMoverEnemigo);
     xTaskCreate(crearTimers, "timers", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xHandleCrearTimers);
     xTaskCreate(sumarPuntaje, "sumarPuntajes", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xHandleSumarPuntaje);
     xTaskCreate(reiniciarValores, "reiniciarValores", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(mostrarPuntaje, "mostrarPuntajes", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    //xTaskCreate(escribirMemoria, "escribirMemoria", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
     /* Finally start the scheduler. */
     vTaskStartScheduler();
 

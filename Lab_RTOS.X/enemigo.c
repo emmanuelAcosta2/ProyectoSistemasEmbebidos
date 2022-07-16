@@ -9,13 +9,15 @@
 #include "utils/manejo_leds_rgb.h"
 #include "sonidos.h"
 #include "timers.h"
+#include "escribirMemoria.h"
+#include "mcc_generated_files/memory/flash_demo.h"
 #define EXTERN
 
 EXTERN enemigoStruct enemigo;
 SemaphoreHandle_t semaforoStructEnemigo;
 
 int octanteEnemigoInicial() {
-    int octante = 5;
+    int octante = structCoordenadas.octanteActualBlanca;
     int numero;
     srand(time(NULL));
     do {
@@ -179,7 +181,13 @@ int * caminoMasCorto(int tiempoEnMilis) {
 
         int octanteBlanca = enemigo.octanteBlanco;
         if (distancia == 0) {
+            //uint32_t valorMemoria = leerMemoria();
+            //WordWriteExample();
+            //escribirMemoria();
+            //apagarLeds();
+            //vTaskDelay(pdMS_TO_TICKS(1000));
             terminoJuego = true;
+            empezarJuego = false;
             sonidoPerderSinSuperarHS();
             xTimerStop(xTimer,0);
             prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);

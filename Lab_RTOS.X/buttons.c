@@ -45,13 +45,9 @@ void boton1_isr(void) {
 }
 
 void boton2_isr(void) {
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
+
+    
+    
 }
 
 void BTN1_reset(void) {

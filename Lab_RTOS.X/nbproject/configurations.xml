@@ -18,6 +18,10 @@
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
+        <logicalFolder name="memory" displayName="memory" projectFiles="true">
+          <itemPath>mcc_generated_files/memory/flash_demo.h</itemPath>
+          <itemPath>mcc_generated_files/memory/flash.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="usb" displayName="usb" projectFiles="true">
           <itemPath>mcc_generated_files/usb/usb_hal_pic32mm.h</itemPath>
           <itemPath>mcc_generated_files/usb/usb_ch9.h</itemPath>
@@ -70,6 +74,10 @@
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
+        <logicalFolder name="memory" displayName="memory" projectFiles="true">
+          <itemPath>mcc_generated_files/memory/flash.c</itemPath>
+          <itemPath>mcc_generated_files/memory/flash_demo.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="usb" displayName="usb" projectFiles="true">
           <itemPath>mcc_generated_files/usb/usb_device_events.c</itemPath>
           <itemPath>mcc_generated_files/usb/usb_device.c</itemPath>
@@ -101,6 +109,10 @@
           <itemPath>buttons.c</itemPath>
           <itemPath>reiniciarValores.h</itemPath>
           <itemPath>reiniciarValores.c</itemPath>
+          <itemPath>mostrarPuntaje.h</itemPath>
+          <itemPath>mostrarPuntaje.c</itemPath>
+          <itemPath>escribirMemoria.h</itemPath>
+          <itemPath>escribirMemoria.c</itemPath>
         </logicalFolder>
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>../../../Proyecto/Proyecto.X/platform/LIS3DH/LIS3DH.c</itemPath>

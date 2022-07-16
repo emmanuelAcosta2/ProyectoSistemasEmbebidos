@@ -102,6 +102,10 @@ ws2812_t obtenerColor(int colorNum) {
             return GREEN;
         case 4:
             return OFF;
+        case 5:
+            return PURPLE;
+        case 6:
+            return CYAN;
     }
 }
 
@@ -196,6 +200,24 @@ void setLEDRGBBlanca(int ledNum, int colorNum) {
     }
     // Establece el color del LED indicado, sin modificar el estado de los otros
     // LED.
+
+}
+
+void setLEDRGBComun(int ledNum, int colorNum) {
+
+    /* See if we can obtain the semaphore.  If the semaphore is not
+    available wait 10 ticks to see if it becomes free. */
+
+    int i;
+    arrayLed[mapearLeds(ledNum)] = obtenerColor(colorNum);
+    WS2812_send(arrayLed, CANTIDAD_LEDS);
+
+
+    // Actualiza los datos del último LED modificado
+    ultimoLedModificadoAppRegister.led = ledNum;
+    ultimoLedModificadoAppRegister.color = colorNum;
+    RTCC_TimeGet(&ultimoLedModificadoAppRegister.time);
+
 
 }
 

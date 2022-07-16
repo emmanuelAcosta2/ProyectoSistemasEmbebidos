@@ -19,7 +19,9 @@ build/default/debug/main.o: main.c freeRTOS/include/FreeRTOS.h \
  framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h lectura.h utils.h \
  freeRTOS/include/FreeRTOS.h freeRTOS/include/semphr.h \
  freeRTOS/include/timers.h freeRTOS/include/task.h enemigo.h sonidos.h \
- timers.h freeRTOS/include/timers.h buttons.h reiniciarValores.h
+ timers.h freeRTOS/include/timers.h buttons.h reiniciarValores.h \
+ mostrarPuntaje.h mcc_generated_files/memory/flash_demo.h \
+ escribirMemoria.h
 
 freeRTOS/include/FreeRTOS.h:
 
@@ -108,3 +110,9 @@ freeRTOS/include/timers.h:
 buttons.h:
 
 reiniciarValores.h:
+
+mostrarPuntaje.h:
+
+mcc_generated_files/memory/flash_demo.h:
+
+escribirMemoria.h:
