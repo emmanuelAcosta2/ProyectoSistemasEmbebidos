@@ -24,58 +24,58 @@ void sonidoInicio() {
 }
 
 void sonidoPerderSuperarHS() {
-    int i = 50;
+    int i = 5;
     while (i != 0) {
         i--;
-        UT_delay(20000);
+        UT_delay(2000);
+        BUZ_CTRL_Toggle();
+    }
+    i = 7;
+    while (i != 0) {
+        i--;
+        UT_delay(1500);
+        BUZ_CTRL_Toggle();
+    }
+    i = 10;
+    while (i != 0) {
+        i--;
+        UT_delay(1250);
+        BUZ_CTRL_Toggle();
+    }
+    i = 20;
+    while (i != 0) {
+        i--;
+        UT_delay(1000);
+        BUZ_CTRL_Toggle();
+    }
+    i = 30;
+    while (i != 0) {
+        i--;
+        UT_delay(750);
         BUZ_CTRL_Toggle();
     }
     i = 70;
     while (i != 0) {
         i--;
-        UT_delay(15000);
+        UT_delay(500);
         BUZ_CTRL_Toggle();
     }
-    i = 100;
+    i = 7;
     while (i != 0) {
         i--;
-        UT_delay(12500);
+        UT_delay(1500);
         BUZ_CTRL_Toggle();
     }
-    i = 200;
+    i = 7;
     while (i != 0) {
         i--;
-        UT_delay(10000);
+        UT_delay(1500);
         BUZ_CTRL_Toggle();
     }
-    i = 300;
+    i = 75;
     while (i != 0) {
         i--;
-        UT_delay(7500);
-        BUZ_CTRL_Toggle();
-    }
-    i = 750;
-    while (i != 0) {
-        i--;
-        UT_delay(5000);
-        BUZ_CTRL_Toggle();
-    }
-    i = 70;
-    while (i != 0) {
-        i--;
-        UT_delay(15000);
-        BUZ_CTRL_Toggle();
-    }
-    i = 70;
-    while (i != 0) {
-        i--;
-        UT_delay(15000);
-        BUZ_CTRL_Toggle();
-    }
-    i = 750;
-    while (i != 0) {
-        i--;
-        UT_delay(5000);
+        UT_delay(500);
         BUZ_CTRL_Toggle();
     }
 }

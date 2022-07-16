@@ -187,12 +187,22 @@ int * caminoMasCorto(int tiempoEnMilis) {
             //escribirMemoria();
             //apagarLeds();
             //vTaskDelay(pdMS_TO_TICKS(1000));
-            writeWord(puntaje);
+            int puntajeMemoria = readWord();
+            //vTaskDelay(100);
+            if (puntaje > puntajeMemoria) {
+                estadoBoton1.superoPuntaje = true;
+                
+                //vTaskDelay(100);
+                writeWord(puntaje);
+                sonidoPerderSuperarHS();
+            } else {
+                sonidoPerderSinSuperarHS();
+            }
             terminoJuego = true;
             empezarJuego = false;
-            sonidoPerderSinSuperarHS();
-            xTimerStop(xTimer,0);
-            prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
+            
+            xTimerStop(xTimer, 0);
+            //prenderLedEnemigo(enemigo.octanteEnemigo, octanteBlanca);
         }
         for (int i = 0; i < distancia; i++) {
             /*if (enemigo.octanteEnemigo == 8) {

@@ -40,6 +40,8 @@ extern "C" {
         bool bandera;
         bool reiniciar;
         bool timers;
+        bool superoPuntaje;
+        bool seReinicio;
     } estadoBoton;
     EXTERN estadoBoton estadoBoton1;
     EXTERN estadoBoton estadoBoton2;

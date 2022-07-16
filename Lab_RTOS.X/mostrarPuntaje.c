@@ -2,6 +2,7 @@
 #include "mostrarPuntaje.h"
 #include "utils/manejo_leds_rgb.h"
 #include "escribirMemoria.h"
+#include "sonidos.h"
 
 void mostrarPuntaje(void *params) {
     for (;;) {
@@ -9,7 +10,10 @@ void mostrarPuntaje(void *params) {
         if (terminoJuego && !empezarJuego && entrar) {
             //Comentar esto
 
-            int puntaje2 = readWord();
+            
+
+            int puntaje2 = puntaje;
+
             int bolasPurple = cantidadLedsColor(puntaje2, 50);
             puntaje2 = puntaje2 % 50;
             int bolasCyan = cantidadLedsColor(puntaje2, 20);
@@ -63,7 +67,7 @@ void mostrarPuntaje(void *params) {
             }
             entrar = false;
         }
-        if(terminoJuego && !empezarJuego){
+        if (terminoJuego && !empezarJuego) {
             entrar = true;
         }
     }

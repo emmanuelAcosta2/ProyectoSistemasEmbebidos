@@ -85,6 +85,8 @@ int main(void) {
     // initialize the device
     empezarJuego = false;
     terminoJuego = true;
+    estadoBoton1.seReinicio = true;
+    puntaje = readWord();
     SYSTEM_Initialize();
     BUZ_CTRL_SetDigitalOutput();
     semaforoStructCoordenadas = xSemaphoreCreateMutex();
