@@ -183,9 +183,11 @@ int * caminoMasCorto(int tiempoEnMilis) {
         if (distancia == 0) {
             //uint32_t valorMemoria = leerMemoria();
             //WordWriteExample();
+            //PageWritexample();
             //escribirMemoria();
             //apagarLeds();
             //vTaskDelay(pdMS_TO_TICKS(1000));
+            writeWord(puntaje);
             terminoJuego = true;
             empezarJuego = false;
             sonidoPerderSinSuperarHS();

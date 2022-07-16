@@ -54,14 +54,17 @@ void WordWriteExample() {
 
     // Program Valid Key for NVM Commands
     FLASH_Unlock(FLASH_UNLOCK_KEY);
-    
+
 
     // Erase the page of flash at this address
-    result = FLASH_ErasePage(flash_storage_address);
+    //result = FLASH_ErasePage(flash_storage_address);
 
     if (result == false) {
         FlashError();
     }
+
+    read_data[0] = FLASH_ReadWord(flash_storage_address);
+
 
 
     // Write 32 bit Data to the first DWORD locations.
@@ -87,7 +90,7 @@ void WordWriteExample() {
     read_data[2] = FLASH_ReadWord(flash_storage_address + 8);
     read_data[3] = FLASH_ReadWord(flash_storage_address + 12);
 
-
+    puntaje = read_data[0];
 
     // Stop if the read data does not match the write data;
     if ((write_data[0] != read_data[0]) ||
@@ -98,7 +101,7 @@ void WordWriteExample() {
     }
 }
 
-static void PageWritexample() {
+void PageWritexample() {
     uint32_t flash_storage_address, flashOffset, readData;
     uint16_t result;
     uint32_t write_data[4] = {0};
@@ -119,7 +122,7 @@ static void PageWritexample() {
     if (result == false) {
         FlashError();
     }
-
+     
     // Program flash with a data pattern.  For the data pattern we will use the index 
     // into the flash as the data.
     for (flashOffset = 0; flashOffset < FLASH_ERASE_PAGE_SIZE_IN_PC_UNITS; flashOffset += 8) {

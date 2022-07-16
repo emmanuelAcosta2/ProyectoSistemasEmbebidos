@@ -37,8 +37,8 @@ extern "C" {
 #endif
 
 
-    void escribirMemoria(void *params);
-    uint32_t leerMemoria();
+void writeWord(int puntaje);
+int readWord();
 
     /* Provide C++ Compatibility */
 #ifdef __cplusplus

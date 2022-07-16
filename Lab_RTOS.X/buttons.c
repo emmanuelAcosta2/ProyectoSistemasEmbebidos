@@ -6,6 +6,7 @@
 #include "enemigo.h"
 #include "timers.h"
 #include "lectura.h"
+#include "sonidos.h"
 #define DELAYDEBOUNCE 50
 
 bool empezarJuego;
@@ -26,10 +27,10 @@ void boton1_isr(void) {
     }
 
 
-
+    
     xTimerStartFromISR(xTimer,0);
     xTimerResetFromISR(xTimer,pdMS_TO_TICKS(1000));
-
+    sonidoInicio();
     estadoBoton1.bandera = true;
     milisegundosEnemigo = 1500;
     tiempoRojo = 0;

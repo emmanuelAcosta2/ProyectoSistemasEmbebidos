@@ -7,7 +7,7 @@ build/default/production/mostrarPuntaje.o: mostrarPuntaje.c utils.h \
  freeRTOS/include/queue.h freeRTOS/include/timers.h \
  freeRTOS/include/task.h freeRTOS/include/list.h mostrarPuntaje.h \
  utils/manejo_leds_rgb.h utils/../freeRTOS/include/FreeRTOS.h \
- utils/../freeRTOS/include/semphr.h
+ utils/../freeRTOS/include/semphr.h escribirMemoria.h
 
 utils.h:
 
@@ -42,3 +42,5 @@ utils/manejo_leds_rgb.h:
 utils/../freeRTOS/include/FreeRTOS.h:
 
 utils/../freeRTOS/include/semphr.h:
+
+escribirMemoria.h:

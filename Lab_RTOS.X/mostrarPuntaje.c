@@ -1,12 +1,15 @@
 #include "utils.h"
 #include "mostrarPuntaje.h"
 #include "utils/manejo_leds_rgb.h"
+#include "escribirMemoria.h"
 
 void mostrarPuntaje(void *params) {
     for (;;) {
         bool entrar = true;
         if (terminoJuego && !empezarJuego && entrar) {
-            int puntaje2 = puntaje;
+            //Comentar esto
+
+            int puntaje2 = readWord();
             int bolasPurple = cantidadLedsColor(puntaje2, 50);
             puntaje2 = puntaje2 % 50;
             int bolasCyan = cantidadLedsColor(puntaje2, 20);

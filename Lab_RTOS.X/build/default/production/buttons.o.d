@@ -8,7 +8,7 @@ build/default/production/buttons.o: buttons.c utils.h \
  freeRTOS/include/task.h freeRTOS/include/list.h buttons.h utils/delay.h \
  freeRTOS/include/FreeRTOS.h enemigo.h timers.h freeRTOS/include/timers.h \
  lectura.h framework/Accelerometer/Accelerometer.h \
- framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h
+ framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h sonidos.h
 
 utils.h:
 
@@ -53,3 +53,5 @@ lectura.h:
 framework/Accelerometer/Accelerometer.h:
 
 framework/Accelerometer/../../platform/LIS3DH/LIS3DH.h:
+
+sonidos.h:

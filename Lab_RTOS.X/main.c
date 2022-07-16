@@ -90,6 +90,7 @@ int main(void) {
     semaforoStructCoordenadas = xSemaphoreCreateMutex();
     semaforoArrayLedsYSend = xSemaphoreCreateMutex();
     semaforoStructEnemigo = xSemaphoreCreateMutex();
+    //readMemory();
 
     //Inicializar los botones
     BTN1_SetDigitalInput();
